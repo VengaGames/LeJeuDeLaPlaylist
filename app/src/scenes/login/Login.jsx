@@ -17,9 +17,9 @@ const Login = () => {
         <h1 className="text-lg mb-2">Rejoindre une salle</h1>
         <form onSubmit={handlesubmit} className="flex gap-4 flex-col items-center">
           <label htmlFor="room">Salle</label>
-          <input autoComplete="off" className="bg-gray-100 !ring-0 !outline-none" required type="text" name="room" />
+          <input autoComplete="off" className="bg-gray-200 !ring-0 !outline-none" required type="text" name="room" />
           <label htmlFor="name">Nom</label>
-          <input autoComplete="off" className="bg-gray-100 !ring-0 !outline-none" required type="text" name="name" />
+          <input autoComplete="off" className="bg-gray-200 !ring-0 !outline-none" required type="text" name="name" />
           <button className="border border-black p-2" type="submit">
             Rejoindre
           </button>
