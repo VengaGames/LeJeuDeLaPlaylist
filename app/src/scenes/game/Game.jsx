@@ -74,21 +74,19 @@ const Login = () => {
             <ConnectedPlayers players={users} />
             <div>Toutes les musiques ont été sélectionnées</div>
             <div>Jeu en cours</div>
-            {users.find((user) => user.id === socket.id)?.admin && (
-              <>
-                {curentPlayingMusic && (
-                  <div className="flex flex-col items-center">
-                    <iframe
-                      className="w-O h-0"
-                      src={`https://www.youtube.com/embed/${curentPlayingMusic.id.videoId}?autoplay=1`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen></iframe>
-                    <button className="p-1 border border-black m-2" onClick={() => socket.emit("next-music", null)}>
-                      Passer à la musique suivante
-                    </button>
-                  </div>
+            {curentPlayingMusic && (
+              <div className="flex flex-col items-center">
+                <iframe
+                  className="w-O h-0"
+                  src={`https://www.youtube.com/embed/${curentPlayingMusic.id.videoId}?autoplay=1`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen></iframe>
+                {users.find((user) => user.id === socket.id)?.admin && (
+                  <button className="p-1 border border-black m-2" onClick={() => socket.emit("next-music", null)}>
+                    Passer à la musique suivante
+                  </button>
                 )}
-              </>
+              </div>
             )}
           </div>
         </div>
