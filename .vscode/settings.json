@@ -1,0 +1,24 @@
+{
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#444e08",
+    "titleBar.activeForeground": "#cac238",
+    "titleBar.inactiveBackground": "#444e08",
+    "titleBar.inactiveForeground": "#6e7f0c"
+  },
+  "cSpell.words": [
+    "datasheet",
+    "ecommerce",
+    "firstname",
+    "lastname",
+    "maintenancepagination",
+    "UOMS"
+  ],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
