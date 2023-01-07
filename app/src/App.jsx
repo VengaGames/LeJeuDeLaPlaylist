@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./scenes/login/Login";
+import Game from "./scenes/game/Game";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/game" element={<Game />} />
         </Routes>
       </Router>
     </div>
