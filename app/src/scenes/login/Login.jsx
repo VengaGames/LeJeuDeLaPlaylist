@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../../service/api";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [rooms, setRooms] = useState([]);
+
+  const getRooms = async () => {
+    const res = await API.get("/room");
+    if (!res.ok) return console.log(res);
+    console.log(res.data);
+    setRooms(res.data);
+  };
+
+  useEffect(() => {
+    getRooms();
+  }, []);
 
   const handlesubmit = (e) => {
     e.preventDefault();
     const room = e.target.elements.room.value;
     const name = e.target.elements.name.value;
-    console.log(room, name);
     navigate(`/game?room=${room}&name=${name}`);
   };
   return (
@@ -25,6 +37,21 @@ const Login = () => {
           </button>
         </form>
       </div>
+      {rooms.length > 0 ? (
+        <div className="mt-4">
+          <h1 className="text-lg mb-2">Salles disponibles :</h1>
+          <div className="flex flex-col gap-2">
+            {rooms.map((room) => (
+              <div key={room.room} className="flex gap-2">
+                <div>{room.room}</div>
+                <div>
+                  ({room.usersNb} joueur{room.usersNb > 1 ? "s" : ""})
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -1,7 +1,6 @@
 const users = [];
 
 function addUser({ id, name, room }) {
-  console.log(users);
   name = name.trim().toLowerCase();
   room = room.trim().toLowerCase();
 
@@ -18,6 +17,14 @@ function addUser({ id, name, room }) {
   users.push(user);
 
   return { user };
+}
+
+function getRooms() {
+  let rooms = users.map((user) => user.room);
+  rooms = [...new Set(rooms)];
+
+  const usersNbInRooms = rooms.map((room) => getUsersInRoom(room)).map((users) => users.length);
+  return rooms.map((room, index) => ({ room, usersNb: usersNbInRooms[index] }));
 }
 
 function removeUser(id) {
@@ -42,4 +49,4 @@ function getUsersInRoom(room) {
   return users.filter((user) => user.room === room);
 }
 
-module.exports = { addUser, modifyUser, removeUser, getUser, getUsersInRoom };
+module.exports = { addUser, modifyUser, removeUser, getUser, getUsersInRoom, getRooms };

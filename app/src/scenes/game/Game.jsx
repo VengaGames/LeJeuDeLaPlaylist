@@ -29,7 +29,10 @@ const Login = () => {
     });
     socket.on("all-videos-selected", (confirmation) => {
       setAllVideosSelected(confirmation);
-      if (!confirmation) setSelectedVideo(null);
+      if (!confirmation) {
+        setSelectedVideo(null);
+        setDataSearch([]);
+      }
       socket.emit("next-music", null);
     });
     socket.on("the-next-music", (music) => {

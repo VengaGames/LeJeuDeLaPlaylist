@@ -8,6 +8,7 @@ const { connectToIoServer } = require("./socket");
 app.use(cors());
 
 app.use("/youtube", require("./controllers/youtube"));
+app.use("/room", require("./controllers/room"));
 
 app.get("/", async (req, res) => {
   return res.status(200).send({ message: "Hello world", last_deployed_at: new Date().toLocaleString() });
