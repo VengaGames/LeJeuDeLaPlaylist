@@ -1,20 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import API from "../../service/api";
-import { DebounceInput } from "react-debounce-input";
 let socket;
 
 const Login = () => {
+  const query = new URLSearchParams(window.location.search);
   const [dataSearch, setDataSearch] = useState([]);
   const qRef = useRef();
+  const roomData = {
+    name: query.get("name"),
+    room: query.get("room"),
+  };
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
-  const query = new URLSearchParams(window.location.search);
+  const [allVideosSelected, setAllVideosSelected] = useState(false);
+  const [curentPlayingMusic, setCurrentPlayingMusic] = useState(null);
 
   useEffect(() => {
-    const room = query.get("room");
-    const name = query.get("name");
+    const { name, room } = roomData;
     socket = io(import.meta.env.VITE_BACKEND_ENDPOINT, {
       transports: ["websocket"],
       upgrade: false,
@@ -23,11 +27,27 @@ const Login = () => {
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
+    socket.on("all-videos-selected", (confirmation) => {
+      setAllVideosSelected(confirmation);
+      if (!confirmation) setSelectedVideo(null);
+      socket.emit("next-music", null);
+    });
+    socket.on("the-next-music", (music) => {
+      setCurrentPlayingMusic(music);
+    });
     return () => {
       socket.emit("disconnect");
       socket.off();
     };
   }, []);
+
+  useEffect(() => {
+    if (selectedVideo) {
+      socket.emit("select-video", selectedVideo);
+    } else {
+      socket.emit("select-video", null);
+    }
+  }, [selectedVideo]);
 
   const getResults = async () => {
     if (!qRef.current.value) return setDataSearch([]);
@@ -45,15 +65,45 @@ const Login = () => {
     return str;
   };
 
+  if (allVideosSelected)
+    return (
+      <div className="w-full h-full m-2 flex items-center justify-center">
+        <div className="flex items-center flex-col w-fit">
+          <h1 className="mb-4">Room : {roomData.room}</h1>
+          <div className="flex flex-col items-center">
+            <ConnectedPlayers players={users} />
+            <div>Toutes les musiques ont été sélectionnées</div>
+            <div>Jeu en cours</div>
+            {users.find((user) => user.id === socket.id)?.admin && (
+              <>
+                {curentPlayingMusic && (
+                  <div className="flex flex-col items-center">
+                    <iframe
+                      className="w-O h-0"
+                      src={`https://www.youtube.com/embed/${curentPlayingMusic.id.videoId}?autoplay=1`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen></iframe>
+                    <button className="p-1 border border-black m-2" onClick={() => socket.emit("next-music", null)}>
+                      Passer à la musique suivante
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+
   return (
     <div className="w-full h-full m-2 flex items-center justify-center">
       <div className="flex items-center flex-col w-fit">
-        <h1 className="mb-4">Jeu</h1>
+        <h1 className="mb-4">Room : {roomData.room}</h1>
         {selectedVideo ? (
           <div className="flex flex-col items-center">
             <ConnectedPlayers players={users} />
             <div>Musique sélectionnée</div>
-            <div>Titre : {selectedVideo.snippet.title} </div>
+            <div>Titre : {decodeEntities(selectedVideo.snippet.title)} </div>
             <button className="p-1 border border-black m-2" onClick={() => setSelectedVideo(null)}>
               Revenir à la recherche
             </button>
@@ -76,6 +126,7 @@ const Login = () => {
                 <button disabled={loading} className="p-1 border border-black m-2" onClick={() => getResults()}>
                   Rechercher
                 </button>
+                {loading && <div>Chargement...</div>}
               </div>
             </div>
             <div className="">
@@ -94,16 +145,22 @@ const Login = () => {
 };
 
 const ConnectedPlayers = ({ players }) => {
+  const [showPlayers, setShowPlayers] = useState(true);
   return (
-    <div className="flex flex-col h-fit p-3 border border-black rounded-lg items-center">
-      <div className="">Joueurs connectés</div>
-      <div className="flex flex-col gap-2">
-        {players.map((player) => (
-          <div key={player.id} className="flex gap-2">
-            <div>{player.name}</div>
-          </div>
-        ))}
-      </div>
+    <div onClick={() => setShowPlayers((prev) => !prev)} className="flex flex-col h-fit p-3 border border-black rounded-lg items-center">
+      <div className="">Joueurs</div>
+      {showPlayers ? (
+        <div className="flex flex-col gap-2">
+          {players.map((player) => (
+            <div key={player.id} className="flex gap-2">
+              {player.admin && <div className="text-red-500">A</div>}
+              <div className={`${player.videoSelected ? "text-green-500" : "text-black"}`}>{player.name}</div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-black">{players.length} joueurs connectés</div>
+      )}
     </div>
   );
 };

@@ -30,6 +30,8 @@ exports.connectToIoServer = (server) => {
       }
     });
 
+    require("./controllers/youtube").handleSocket(socket, io);
+
     socket.on("disconnect", () => {
       const user = removeUser(socket.id);
       if (!user) return;
