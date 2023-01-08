@@ -1,5 +1,5 @@
 const { Server } = require("socket.io");
-const { addUser, removeUser, getUser, getUsersInRoom, getAdmin } = require("./utils/users");
+const { addUser, removeUser, getUsersInRoom } = require("./utils/users");
 
 exports.connectToIoServer = (server) => {
   const io = new Server(server, {
@@ -33,9 +33,17 @@ exports.connectToIoServer = (server) => {
     require("./controllers/youtube").handleSocket(socket, io);
 
     socket.on("disconnect", () => {
-      const user = removeUser(socket.id);
-      if (!user) return;
-      console.log("user disconnected " + user?.name);
+      try {
+        const user = removeUser(socket.id);
+        if (!user) return;
+        console.log(`${user.name} left ${user.room}`);
+        io.to(user.room).emit("roomData", {
+          room: user.room,
+          users: getUsersInRoom(user.room),
+        });
+      } catch (error) {
+        console.log(error);
+      }
     });
   });
 };

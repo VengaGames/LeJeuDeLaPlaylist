@@ -2,6 +2,7 @@ const playlist = [];
 
 const addSong = (song, room) => {
   playlist.push({ video: song, room: room });
+  shuffleArray(playlist);
 };
 
 const removeSong = (video, room) => {
@@ -18,5 +19,12 @@ const getFirstSong = (room) => {
 const getPlaylist = (room) => {
   return playlist.filter((song) => song.room === room);
 };
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 module.exports = { addSong, removeSong, getPlaylist, getFirstSong };

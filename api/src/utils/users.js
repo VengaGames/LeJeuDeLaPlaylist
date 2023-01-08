@@ -32,7 +32,12 @@ function getRooms() {
 
 function removeUser(id) {
   const index = users.findIndex((user) => user.id === id);
+
   if (index !== -1) {
+    if (users[index].admin) {
+      const usersInRoom = getUsersInRoom(users[index].room);
+      usersInRoom[1] ? (usersInRoom[1].admin = true) : null;
+    }
     return users.splice(index, 1)[0];
   }
 }

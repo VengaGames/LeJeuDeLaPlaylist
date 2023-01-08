@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import API from "../../service/api";
-import { MdOutlineAudiotrack } from "react-icons/md";
+import { MdOutlineAudiotrack, MdOutlineAdminPanelSettings } from "react-icons/md";
+
 let socket;
 
 const Login = () => {
@@ -193,7 +194,7 @@ const ConnectedPlayers = ({ players }) => {
         <div className="flex flex-col gap-2">
           {players.map((player) => (
             <div key={player.id} className="flex gap-2">
-              {player.admin && <div className="text-red-500">A</div>}
+              {player.admin && <MdOutlineAdminPanelSettings className="text-red-500" />}
               <div className={`${player.videoSelected ? "text-green-500" : "text-black"}`}>{player.name}</div>
             </div>
           ))}
