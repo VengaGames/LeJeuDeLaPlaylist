@@ -11,7 +11,7 @@ function addUser({ id, name, room }) {
 
   const usersInThisRoom = getUsersInRoom(room);
 
-  if (usersInThisRoom.length === 0) {
+  if (usersInThisRoom.length === 0 || usersInThisRoom.every((user) => user.admin === false)) {
     const user = { id, name, room, admin: true };
     users.push(user);
     return { user };

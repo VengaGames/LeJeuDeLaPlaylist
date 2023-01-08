@@ -76,4 +76,13 @@ ytVideoController.handleSocket = (socket, io) => {
       console.log(error);
     }
   });
+
+  socket.on("audio-for-everyone", (value) => {
+    try {
+      const user = getUser(socket.id);
+      io.to(user.room).emit("audio-for-everyone-confirm", value);
+    } catch (error) {
+      console.log(error);
+    }
+  });
 };

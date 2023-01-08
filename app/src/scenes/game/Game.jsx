@@ -1,21 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import API from "../../service/api";
+import { MdOutlineAudiotrack } from "react-icons/md";
 let socket;
 
 const Login = () => {
   const query = new URLSearchParams(window.location.search);
-  const [dataSearch, setDataSearch] = useState([]);
-  const qRef = useRef();
   const roomData = {
     name: query.get("name"),
     room: query.get("room"),
   };
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [dataSearch, setDataSearch] = useState([]);
+  const qRef = useRef();
   const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState([]);
+
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const [allVideosSelected, setAllVideosSelected] = useState(false);
   const [curentPlayingMusic, setCurrentPlayingMusic] = useState(null);
+  const [audioForEveryone, setAudioForEveryone] = useState(false);
+
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const { name, room } = roomData;
@@ -37,6 +41,9 @@ const Login = () => {
     });
     socket.on("the-next-music", (music) => {
       setCurrentPlayingMusic(music);
+    });
+    socket.on("audio-for-everyone-confirm", (confirmation) => {
+      setAudioForEveryone(confirmation);
     });
     return () => {
       socket.emit("disconnect");
@@ -77,20 +84,31 @@ const Login = () => {
             <ConnectedPlayers players={users} />
             <div>Toutes les musiques ont été sélectionnées</div>
             <div>Jeu en cours</div>
-            {curentPlayingMusic && (
+            {curentPlayingMusic ? (
               <div className="flex flex-col items-center">
-                <iframe
-                  className="w-O h-0"
-                  src={`https://www.youtube.com/embed/${curentPlayingMusic.id.videoId}?autoplay=1`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen></iframe>
-                {users.find((user) => user.id === socket.id)?.admin && (
-                  <button className="p-1 border border-black m-2" onClick={() => socket.emit("next-music", null)}>
-                    Passer à la musique suivante
-                  </button>
-                )}
+                {audioForEveryone ? (
+                  <iframe
+                    className="w-O h-0"
+                    src={`https://www.youtube.com/embed/${curentPlayingMusic.id.videoId}?autoplay=1`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen></iframe>
+                ) : null}
+                {users.find((user) => user.id === socket.id)?.admin ? (
+                  <>
+                    {!audioForEveryone ? (
+                      <iframe
+                        className="w-O h-0"
+                        src={`https://www.youtube.com/embed/${curentPlayingMusic.id.videoId}?autoplay=1`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen></iframe>
+                    ) : null}
+                    <button className="p-1 border border-black m-2" onClick={() => socket.emit("next-music", null)}>
+                      Passer à la musique suivante
+                    </button>
+                  </>
+                ) : null}
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
@@ -99,7 +117,9 @@ const Login = () => {
   return (
     <div className="w-full h-full m-2 flex items-center justify-center">
       <div className="flex items-center flex-col w-fit">
-        <h1 className="mb-4">Room : {roomData.room}</h1>
+        <h1 className="mb-4 flex items-center">
+          Room : {roomData.room} {audioForEveryone && <MdOutlineAudiotrack />}{" "}
+        </h1>
         {selectedVideo ? (
           <div className="flex flex-col items-center">
             <ConnectedPlayers players={users} />
@@ -114,6 +134,12 @@ const Login = () => {
             <div className="flex w-full gap-3">
               <ConnectedPlayers players={users} />
               <div className="flex flex-col items-center">
+                {users.find((user) => user.id === socket.id)?.admin ? (
+                  <div className="flex gap-1 mb-2">
+                    <input type="checkbox" checked={audioForEveryone} onChange={(e) => socket.emit("audio-for-everyone", e.target.checked)} />
+                    <label htmlFor="audioForEveryone">Audio pour tout le monde ?</label>
+                  </div>
+                ) : null}
                 <input
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -147,6 +173,19 @@ const Login = () => {
 
 const ConnectedPlayers = ({ players }) => {
   const [showPlayers, setShowPlayers] = useState(true);
+  players.sort((a, b) => {
+    if (a.videoSelected && !b.videoSelected) return -1;
+    if (!a.videoSelected && b.videoSelected) return 1;
+    return 0;
+  });
+  players.sort((a, b) => {
+    a.name.localeCompare(b.name);
+  });
+  players.sort((a, b) => {
+    if (a.admin && !b.admin) return -1;
+    if (!a.admin && b.admin) return 1;
+    return 0;
+  });
   return (
     <div onClick={() => setShowPlayers((prev) => !prev)} className="flex flex-col h-fit p-3 border border-black rounded-lg items-center">
       <div className="">Joueurs</div>
