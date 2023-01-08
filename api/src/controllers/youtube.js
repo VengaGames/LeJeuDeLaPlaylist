@@ -4,6 +4,7 @@ const router = express.Router();
 const KEY = process.env.YOUTUBE_API_KEY;
 const { addSong, removeSong, getPlaylist, getFirstSong } = require("../utils/playlist");
 const { modifyUser, getUsersInRoom, getUser } = require("../utils/users");
+const { initSettings, setSettings, getSettings } = require("../utils/settings");
 
 router.get("/search", async (req, res) => {
   try {
@@ -80,6 +81,7 @@ ytVideoController.handleSocket = (socket, io) => {
   socket.on("audio-for-everyone", (value) => {
     try {
       const user = getUser(socket.id);
+      setSettings(user.room, "audioEveryone", value);
       io.to(user.room).emit("audio-for-everyone-confirm", value);
     } catch (error) {
       console.log(error);

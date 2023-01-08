@@ -23,6 +23,7 @@ const Login = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    getSettings();
     const { name, room } = roomData;
     socket = io(import.meta.env.VITE_BACKEND_ENDPOINT, {
       transports: ["websocket"],
@@ -67,6 +68,13 @@ const Login = () => {
     if (!res.ok) return console.log(res);
     setDataSearch(res.data.items);
     setLoading(false);
+  };
+
+  const getSettings = async () => {
+    const res = await API.get(`/room/settings/${roomData.room}`);
+    if (!res.ok) return console.log(res);
+    console.log(res.data);
+    setAudioForEveryone(res.data.audioEveryone);
   };
 
   const decodeEntities = (s) => {

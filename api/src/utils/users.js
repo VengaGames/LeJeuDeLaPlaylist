@@ -1,3 +1,4 @@
+const { initSettings, removeRoom } = require("../utils/settings");
 const users = [];
 
 function addUser({ id, name, room }) {
@@ -10,6 +11,9 @@ function addUser({ id, name, room }) {
   }
 
   const usersInThisRoom = getUsersInRoom(room);
+  if (usersInThisRoom.length === 0) {
+    initSettings(room);
+  }
 
   if (usersInThisRoom.length === 0 || usersInThisRoom.every((user) => user.admin === false)) {
     const user = { id, name, room, admin: true };
@@ -37,6 +41,11 @@ function removeUser(id) {
     if (users[index].admin) {
       const usersInRoom = getUsersInRoom(users[index].room);
       usersInRoom[1] ? (usersInRoom[1].admin = true) : null;
+    }
+
+    const usersInRoom = getUsersInRoom(users[index].room);
+    if (usersInRoom.length === 1) {
+      removeRoom(users[index].room);
     }
     return users.splice(index, 1)[0];
   }
