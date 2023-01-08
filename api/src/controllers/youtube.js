@@ -2,14 +2,14 @@ const axios = require("axios");
 const express = require("express");
 const router = express.Router();
 const KEY = process.env.YOUTUBE_API_KEY;
-const { addSong, removeSong, getPlaylist } = require("../utils/playlist");
+const { addSong, removeSong, getPlaylist, getFirstSong } = require("../utils/playlist");
 const { modifyUser, getUsersInRoom, getUser } = require("../utils/users");
 
 router.get("/search", async (req, res) => {
   try {
     const { q } = req.query;
     const { data } = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&q=${encodeURI(q + " audio")}&key=${KEY}&videoCategoryId=10&regionCode=US&type=video`,
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURI(q + " audio")}&key=${KEY}&videoCategoryId=10&regionCode=US&type=video`,
     );
     res.status(200).send({ data: data, ok: true });
   } catch (e) {
@@ -24,23 +24,23 @@ ytVideoController.handleSocket = (socket, io) => {
   socket.on("select-video", (video) => {
     try {
       const user = getUser(socket.id);
-      const users = getUsersInRoom(user.room);
+      const usersInRoom = getUsersInRoom(user.room);
       if (!video) {
         modifyUser(socket.id, "videoSelected", false);
         io.to(user.room).emit("roomData", {
           room: user.room,
-          users: users,
+          users: usersInRoom,
         });
         return;
       }
-      addSong(video);
+      addSong(video, user.room);
       modifyUser(user.id, "videoSelected", true);
 
       io.to(user.room).emit("roomData", {
         room: user.room,
-        users: users,
+        users: usersInRoom,
       });
-      if (users.every((user) => user.videoSelected)) {
+      if (usersInRoom.every((user) => user.videoSelected)) {
         io.to(user.room).emit("all-videos-selected", true);
       }
     } catch (error) {
@@ -52,7 +52,7 @@ ytVideoController.handleSocket = (socket, io) => {
     try {
       const user = getUser(socket.id);
       const users = getUsersInRoom(user.room);
-      const playlist = getPlaylist();
+      const playlist = getPlaylist(user.room);
       if (playlist.length === 0) {
         users.forEach((user) => modifyUser(user.id, "videoSelected", false));
         io.to(user.room).emit("the-next-music", null);
@@ -64,8 +64,9 @@ ytVideoController.handleSocket = (socket, io) => {
         return;
       }
       if (user.admin) {
-        io.to(user.room).emit("the-next-music", playlist[0]);
-        removeSong(playlist[0]);
+        const song = getFirstSong(user.room);
+        io.to(user.room).emit("the-next-music", song.video);
+        removeSong(song.video, user.room);
         io.to(user.room).emit("roomData", {
           room: user.room,
           users: users,

@@ -9,7 +9,6 @@ const Login = () => {
   const getRooms = async () => {
     const res = await API.get("/room");
     if (!res.ok) return console.log(res);
-    console.log(res.data);
     setRooms(res.data);
   };
 

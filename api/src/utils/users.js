@@ -1,14 +1,17 @@
 const users = [];
 
 function addUser({ id, name, room }) {
-  name = name.trim().toLowerCase();
+  name = name.trim();
   room = room.trim().toLowerCase();
 
   const existingUser = users.find((user) => user.room === room && user.name === name);
   if (existingUser) {
     return { error: "User is taken" };
   }
-  if (users.length === 0) {
+
+  const usersInThisRoom = getUsersInRoom(room);
+
+  if (usersInThisRoom.length === 0) {
     const user = { id, name, room, admin: true };
     users.push(user);
     return { user };
