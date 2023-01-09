@@ -1,0 +1,79 @@
+.top {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.title {
+
+    margin-top: 1vh;
+    font-weight: bold;
+    font-size: xx-large;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    width: 50vw
+}
+
+
+.presentoir {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cardgame {
+    margin-top: 5vh;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 40.2vw;
+    height: 80.5vh;
+    border: 2px solid;
+    border-radius: 8px;
+    background-color: white;
+}
+
+button.serendre {
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: #ab63a3;
+    margin-bottom: 5px;
+    background-color: #ab63a3;
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+
+.playlistimage {
+    width: 40vw;
+    height: 80vh;
+    border-radius: 8px;
+
+    opacity: 1;
+    transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -webkit-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+}
+
+.playlistimage:hover {
+    opacity: .5;
+
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}

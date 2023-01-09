@@ -1,0 +1,96 @@
+.title {
+
+    margin-top: 1vh;
+    font-weight: bold;
+    font-size: xx-large;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    width: 50vw
+}
+
+
+.retour {
+    width: 5vw;
+    height: 10vh;
+    margin-left: 10px;
+}
+
+
+
+.join {
+    background-color: white;
+    width: 25vw;
+    height: 40vh;
+    justify-items: center;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    border: px solid;
+    border-radius: 8px;
+    border-color: grey;
+    box-shadow: 1px 1px 1px 2px rgb(56, 55, 55);
+    align-items: center;
+
+}
+
+button.join-button {
+    border: 1px solid;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background-color: #ab63a3;
+    color: white;
+    width: 10vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.lesinput {
+    border: 1px solid;
+    border-color: rgb(176, 174, 174);
+    border-radius: 5px;
+    width: 20vw;
+    margin-left: 10px;
+    margin-bottom: 5px;
+
+}
+
+.lesinput:focus {
+    background-color: #ab63a3;
+    outline-width: 0.2px;
+    outline-color: rgb(176, 174, 174);
+
+}
+
+.text {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.buttonform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titre-jeu {
+    margin-top: 5px;
+
+
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

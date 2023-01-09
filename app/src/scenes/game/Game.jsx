@@ -29,7 +29,7 @@ const Login = () => {
       transports: ["websocket"],
       upgrade: false,
     });
-    socket.emit("join", { name, room }, () => {});
+    socket.emit("join", { name, room }, () => { });
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
