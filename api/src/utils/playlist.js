@@ -6,7 +6,7 @@ const addSong = (song, room) => {
 };
 
 const removeSong = (video, room) => {
-  const index = playlist.findIndex((song) => song.video.id.videoId === video.id.videoId && song.room === room);
+  const index = playlist.findIndex((song) => song.video.videoId === video.videoId && song.room === room);
   if (index !== -1) {
     return playlist.splice(index, 1)[0];
   }

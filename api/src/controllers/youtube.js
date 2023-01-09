@@ -1,18 +1,15 @@
-const axios = require("axios");
 const express = require("express");
 const router = express.Router();
-const KEY = process.env.YOUTUBE_API_KEY;
 const { addSong, removeSong, getPlaylist, getFirstSong } = require("../utils/playlist");
 const { modifyUser, getUsersInRoom, getUser } = require("../utils/users");
-const { initSettings, setSettings, getSettings } = require("../utils/settings");
+const { setSettings } = require("../utils/settings");
+const yts = require("yt-search");
 
 router.get("/search", async (req, res) => {
   try {
     const { q } = req.query;
-    const { data } = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURI(q + " audio")}&key=${KEY}&videoCategoryId=10&regionCode=US&type=video`,
-    );
-    res.status(200).send({ data: data, ok: true });
+    const data = await yts(q + " audio");
+    return res.status(200).send({ data: data.videos, ok: true });
   } catch (e) {
     console.log(e);
     res.status(500).send({ message: e.message, ok: false });

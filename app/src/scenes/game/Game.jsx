@@ -66,14 +66,13 @@ const Login = () => {
     setLoading(true);
     const res = await API.get(`/youtube/search?q=${qRef.current.value}`);
     if (!res.ok) return console.log(res);
-    setDataSearch(res.data.items);
+    setDataSearch(res.data);
     setLoading(false);
   };
 
   const getSettings = async () => {
     const res = await API.get(`/room/settings/${roomData.room}`);
     if (!res.ok) return console.log(res);
-    console.log(res.data);
     setAudioForEveryone(res.data.audioEveryone);
   };
 
@@ -98,7 +97,7 @@ const Login = () => {
                 {audioForEveryone ? (
                   <iframe
                     className="w-O h-0"
-                    src={`https://www.youtube.com/embed/${curentPlayingMusic.id.videoId}?autoplay=1`}
+                    src={`https://www.youtube.com/embed/${curentPlayingMusic.videoId}?autoplay=1`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen></iframe>
                 ) : null}
@@ -107,7 +106,7 @@ const Login = () => {
                     {!audioForEveryone ? (
                       <iframe
                         className="w-O h-0"
-                        src={`https://www.youtube.com/embed/${curentPlayingMusic.id.videoId}?autoplay=1`}
+                        src={`https://www.youtube.com/embed/${curentPlayingMusic.videoId}?autoplay=1`}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen></iframe>
                     ) : null}
@@ -133,7 +132,7 @@ const Login = () => {
           <div className="flex flex-col items-center">
             <ConnectedPlayers players={users} />
             <div>Musique sélectionnée</div>
-            <div>Titre : {decodeEntities(selectedVideo.snippet.title)} </div>
+            <div>Titre : {decodeEntities(selectedVideo.title)} </div>
             <button className="p-1 border border-black m-2" onClick={() => setSelectedVideo(null)}>
               Revenir à la recherche
             </button>
@@ -167,9 +166,9 @@ const Login = () => {
             </div>
             <div className="">
               {dataSearch.map((item) => (
-                <div onClick={() => setSelectedVideo(item)} className="flex py-2 gap-2 bg-white max-w-[300px] cursor-pointer border hover:bg-green-100" key={item.id.videoId}>
-                  <img className="max-w-[50px]" src={item.snippet.thumbnails.medium.url} alt="" />
-                  <p>{decodeEntities(item.snippet.title)}</p>
+                <div onClick={() => setSelectedVideo(item)} className="flex py-2 gap-2 bg-white max-w-[300px] cursor-pointer border hover:bg-green-100" key={item.videoId}>
+                  <img className="max-w-[50px]" src={item.thumbnail} alt="" />
+                  <p>{decodeEntities(item.title)}</p>
                 </div>
               ))}
             </div>
