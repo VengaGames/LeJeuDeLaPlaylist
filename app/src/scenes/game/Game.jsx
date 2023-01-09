@@ -48,7 +48,7 @@ const Login = () => {
       setAudioForEveryone(confirmation);
     });
     return () => {
-      socket.emit("disconnect");
+      socket.off("disconnect");
       socket.off();
     };
   }, []);
