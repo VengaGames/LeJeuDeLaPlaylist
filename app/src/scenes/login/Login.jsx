@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../../service/api";
+import { HiArrowLeft } from "react-icons/hi";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,34 +25,63 @@ const Login = () => {
     navigate(`/game?room=${room}&name=${name}`);
   };
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-fit flex flex-col items-center m-5 border p-3 border-black rounded-md">
-        <h1 className="text-lg mb-2">Rejoindre une salle</h1>
-        <form onSubmit={handlesubmit} className="flex gap-4 flex-col items-center">
-          <label htmlFor="room">Salle</label>
-          <input autoComplete="off" className="bg-gray-200 !ring-0 !outline-none" required type="text" name="room" />
-          <label htmlFor="name">Nom</label>
-          <input autoComplete="off" className="bg-gray-200 !ring-0 !outline-none" required type="text" name="name" />
-          <button className="border border-black p-2" type="submit">
-            Rejoindre
-          </button>
-        </form>
-      </div>
-      {rooms.length > 0 ? (
-        <div className="mt-4">
-          <h1 className="text-lg mb-2">Salles disponibles :</h1>
-          <div className="flex flex-col gap-2">
-            {rooms.map((room) => (
-              <div key={room.room} className="flex gap-2">
-                <div>{room.room}</div>
-                <div>
-                  ({room.usersNb} joueur{room.usersNb > 1 ? "s" : ""})
-                </div>
-              </div>
-            ))}
-          </div>
+    <div>
+      <NavLink to="/" end>
+        <HiArrowLeft className="ml-2 mt-2 w-10 h-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ..." alt="icone fleche retour" />
+      </NavLink>
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="bg-white justify-center flex flex-col border rounded-lg border-gray-500 items-center shadow-2xl w-1/4 h-4/6">
+          <h1 className="mt-5">Le Jeu de la Playlist</h1>
+
+          <form onSubmit={handlesubmit} className="flex flex-col">
+            <label className="ml-2.5 mt-2.5" htmlFor="room">
+              Room
+            </label>
+            <input
+              placeholder="Nom de la room..."
+              autoComplete="off"
+              className="border border-gray-500 rounded-lg w-5/6 ml-2.5 mb-1 focus:bg-regal-purple outline-1 outline-black"
+              required
+              type="text"
+              name="room"
+            />
+            <label className="ml-2.5 mt-2.5" htmlFor="name">
+              Pseudo
+            </label>
+            <input
+              placeholder="Ton Pseudo..."
+              autoComplete="off"
+              className="border border-gray-500 rounded-lg w-5/6 ml-2.5 mb-1 focus:bg-regal-purple outline-1 outline-black"
+              required
+              type="text"
+              name="name"
+            />
+            <div className="flex flex-col items-center">
+              <button className="bg-regal-purple rounded-lg border text-white mt-2 mb-2 w-20" type="submit">
+                JOIN
+              </button>
+            </div>
+          </form>
         </div>
-      ) : null}
+        {rooms.length > 0 ? (
+          <div className="mt-4">
+            <h1 className="text-lg mb-2">Salles disponibles :</h1>
+            <div className="flex flex-col gap-2">
+              {rooms.map((room) => (
+                <div key={room.room} className="flex gap-2">
+                  <div>{room.room}</div>
+                  <div>
+                    ({room.usersNb} joueur{room.usersNb > 1 ? "s" : ""})
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
+      <div className="fixed bottom-0 flex justify-center w-full">
+        <h3> Vengaboys © - 2023</h3>
+      </div>
     </div>
   );
 };
