@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import jeuplaylist from "../asset/jeuplaylist.png";
-import indev from "../asset/indev.png";
-import endev from "../asset/endev.png";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
