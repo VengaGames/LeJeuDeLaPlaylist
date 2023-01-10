@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../../service/api";
 import { HiArrowLeft } from "react-icons/hi";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,9 +26,9 @@ const Login = () => {
   };
   return (
     <div>
-      <a href="/">
+      <NavLink to="/" end>
         <HiArrowLeft className="ml-2 mt-2 w-10 h-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ..." alt="icone fleche retour" />
-      </a>
+      </NavLink>
       <div className="w-full h-full flex items-center justify-center">
         <div className="bg-white justify-center flex flex-col border rounded-lg border-gray-500 items-center shadow-2xl w-1/4 h-4/6">
           <h1 className="mt-5">Le Jeu de la Playlist</h1>
@@ -37,9 +38,9 @@ const Login = () => {
               Room
             </label>
             <input
-              placeholder="Name of the room..."
+              placeholder="Nom de la room..."
               autoComplete="off"
-              className="border border-gray-500 rounded-lg w-5/6 ml-2.5 mb-1 focus:bg-regal-purple outline-1 outline-black text-white"
+              className="border border-gray-500 rounded-lg w-5/6 ml-2.5 mb-1 focus:bg-regal-purple outline-1 outline-black"
               required
               type="text"
               name="room"
@@ -48,9 +49,9 @@ const Login = () => {
               Pseudo
             </label>
             <input
-              placeholder="Your Pseudo..."
+              placeholder="Ton Pseudo..."
               autoComplete="off"
-              className="border border-gray-500 rounded-lg w-5/6 ml-2.5 mb-1 focus:bg-regal-purple outline-1 outline-black text-white"
+              className="border border-gray-500 rounded-lg w-5/6 ml-2.5 mb-1 focus:bg-regal-purple outline-1 outline-black"
               required
               type="text"
               name="name"
