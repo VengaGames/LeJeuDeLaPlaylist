@@ -26,6 +26,7 @@ module.exports = {
         big: "1.687rem", // 27px
       },
       colors: {
+        "regal-purple": "#ab63a3",
         primary: {
           DEFAULT: "#5abccd",
           50: "#f0f6f6",

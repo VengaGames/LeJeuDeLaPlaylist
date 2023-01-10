@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../../service/api";
-import './style.css';
-import fleche_arriere from './fleche_arriere.png';
+import { HiArrowLeft } from "react-icons/hi";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,23 +25,38 @@ const Login = () => {
   };
   return (
     <div>
-
       <a href="/">
-        <img className="retour" src={fleche_arriere} alt='icone fleche retour' />
+        <HiArrowLeft className="ml-2 mt-2 w-10 h-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ..." alt="icone fleche retour" />
       </a>
       <div className="w-full h-full flex items-center justify-center">
+        <div className="bg-white justify-center flex flex-col border rounded-lg border-gray-500 items-center shadow-2xl w-1/4 h-4/6">
+          <h1 className="mt-5">Le Jeu de la Playlist</h1>
 
-        <div className="join">
-
-          <h1 className="titre-jeu">Le Jeu de la Playlist</h1>
-
-          <form onSubmit={handlesubmit} className="login-form">
-            <label className="text" htmlFor="room">Room</label>
-            <input placeholder="Name of the room..." autoComplete="off" className="lesinput" required type="text" name="room" />
-            <label className="text" htmlFor="name">Pseudo</label>
-            <input placeholder="Your Pseudo..." autoComplete="off" className="lesinput" required type="text" name="name" />
-            <div className="buttonform">
-              <button className="join-button" type="submit">
+          <form onSubmit={handlesubmit} className="flex flex-col">
+            <label className="ml-2.5 mt-2.5" htmlFor="room">
+              Room
+            </label>
+            <input
+              placeholder="Name of the room..."
+              autoComplete="off"
+              className="border border-gray-500 rounded-lg w-5/6 ml-2.5 mb-1 focus:bg-regal-purple outline-1 outline-black text-white"
+              required
+              type="text"
+              name="room"
+            />
+            <label className="ml-2.5 mt-2.5" htmlFor="name">
+              Pseudo
+            </label>
+            <input
+              placeholder="Your Pseudo..."
+              autoComplete="off"
+              className="border border-gray-500 rounded-lg w-5/6 ml-2.5 mb-1 focus:bg-regal-purple outline-1 outline-black text-white"
+              required
+              type="text"
+              name="name"
+            />
+            <div className="flex flex-col items-center">
+              <button className="bg-regal-purple rounded-lg border text-white mt-2 mb-2 w-20" type="submit">
                 JOIN
               </button>
             </div>
@@ -64,8 +78,8 @@ const Login = () => {
           </div>
         ) : null}
       </div>
-      <div className="footer">
-        <h3 className="bottom"> Vengaboys © - 2023</h3>
+      <div className="fixed bottom-0 flex justify-center w-full">
+        <h3> Vengaboys © - 2023</h3>
       </div>
     </div>
   );
