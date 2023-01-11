@@ -29,8 +29,8 @@ const Login = () => {
       <NavLink to="/" end>
         <HiArrowLeft className="ml-2 mt-2 w-10 h-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ..." alt="icone fleche retour" />
       </NavLink>
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="bg-white justify-center flex flex-col border rounded-lg border-gray-500 items-center shadow-2xl w-3/4 md:w-1/4 h-4/6">
+      <div className="w-full h-full flex flex-col items-center justify-center">
+        <div className="bg-white justify-center flex flex-col border rounded-lg border-gray-500 items-center shadow-2xl w-3/4 md:w-1/4">
           <h1 className="mt-5">Le Jeu de la Playlist</h1>
           <form onSubmit={handlesubmit} className="flex flex-col">
             <label className="ml-2.5 mt-2.5" htmlFor="room">
@@ -63,7 +63,7 @@ const Login = () => {
           </form>
         </div>
         {rooms.length > 0 ? (
-          <div className="mt-4">
+          <div className="mt-8">
             <h1 className="text-lg mb-2">Salles disponibles :</h1>
             <div className="flex flex-col gap-2">
               {rooms.map((room) => (
