@@ -2,11 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import API from "../../service/api";
 import { MdOutlineAudiotrack, MdOutlineAdminPanelSettings } from "react-icons/md";
+import Confetti from "react-confetti";
 
 let socket;
 
 const Login = () => {
   const query = new URLSearchParams(window.location.search);
+  const height = window.innerHeight;
+  const width = window.innerWidth;
   const roomData = {
     name: query.get("name"),
     room: query.get("room"),
@@ -86,6 +89,7 @@ const Login = () => {
   if (allVideosSelected)
     return (
       <div className="w-full h-full m-2 flex items-center justify-center">
+        <Confetti width={width} height={height} />
         <div className="flex items-center flex-col w-fit">
           <h1 className="mb-4">Room : {roomData.room}</h1>
           <div className="flex flex-col items-center">
