@@ -8,10 +8,10 @@ const Home = () => {
     <div>
       <nav class="p-3 border-gray-700 bg-gray-800">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
-          <a href="#" class="flex items-center">
+          <NavLink href="/" class="flex items-center">
             <img src={vengaicon} class="h-6 mr-3 sm:h-10" alt="Venga Logo" />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">VengaGAMES</span>
-          </a>
+          </NavLink>
         </div>
       </nav>
 
