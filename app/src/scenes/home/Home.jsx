@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import jeuplaylist from "../asset/jeuplaylist.png";
 import { NavLink } from "react-router-dom";
+import vengaicon from "../asset/vengaicon.jpeg";
 
 const Home = () => {
   return (
     <div>
-      <div className="flex flex-row justify-center">
-        <h1 className="mt-5 flex font-bold  text-3xl  bg-white justify-center rounded-lg w-fit"> VengaGames</h1>
-      </div>
+      <nav class="p-3 border-gray-700 bg-gray-800">
+        <div class="container flex flex-wrap items-center justify-between mx-auto">
+          <a href="#" class="flex items-center">
+            <img src={vengaicon} class="h-6 mr-3 sm:h-10" alt="Venga Logo" />
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">VengaGAMES</span>
+          </a>
+        </div>
+      </nav>
 
       <div className="flex flex-row justify-center">
         <div className="mt-10 justify-center">
@@ -30,8 +36,8 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-0 flex justify-center w-full">
-        <h3> Vengaboys © - 2023</h3>
+      <div className="fixed bottom-0 flex justify-center w-full bg-gray-800 ">
+        <h3 className=" text-white"> Vengaboys © - 2023</h3>
       </div>
     </div>
   );
