@@ -25,15 +25,6 @@ const Home = () => {
             />
           </NavLink>
         </div>
-        <div className="mt-10 justify-center">
-          <NavLink className="flex justify-center" to="/login" end>
-            <img
-              className=" w-6/12 h-8/10 rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ..."
-              src={jeuplaylist}
-              alt="jeu de la playlist"
-            />
-          </NavLink>
-        </div>
       </div>
 
       <div className="fixed bottom-0 flex justify-center w-full bg-gray-800 ">
