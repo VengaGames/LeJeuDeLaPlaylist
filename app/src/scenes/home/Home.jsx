@@ -6,12 +6,12 @@ import vengaicon from "../asset/vengaicon.jpeg";
 const Home = () => {
   return (
     <div>
-      <nav class="p-3 border-gray-700 bg-gray-800">
-        <div class="container flex flex-wrap items-center justify-between mx-auto">
-          <NavLink href="/" class="flex flex-row items-center">
-            <img src={vengaicon} class="h-6 mr-3 sm:h-10" alt="Venga Logo" />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">VengaGAMES</span>
-          </NavLink>
+      <nav className="p-3 border-gray-700 bg-gray-800">
+        <div className="container flex flex-wrap items-center justify-between mx-auto">
+          <div className="flex flex-row">
+            <img src={vengaicon} className="h-6 mr-3 sm:h-10" alt="Venga Logo" />
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">VengaGAMES</span>
+          </div>
         </div>
       </nav>
 
