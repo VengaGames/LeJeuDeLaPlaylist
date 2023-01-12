@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { io } from "socket.io-client";
 import API from "../../service/api";
 import { MdOutlineAudiotrack, MdOutlineAdminPanelSettings } from "react-icons/md";
-
+import Confetti from "react-confetti";
+import { HiArrowLeft } from "react-icons/hi";
 let socket;
 
 const Login = () => {
   const query = new URLSearchParams(window.location.search);
+  const height = window.innerHeight;
+  const width = window.innerWidth;
   const roomData = {
     name: query.get("name"),
     room: query.get("room"),
@@ -86,6 +90,7 @@ const Login = () => {
   if (allVideosSelected)
     return (
       <div className="w-full h-full m-2 flex items-center justify-center">
+        <Confetti width={width} height={height} />
         <div className="flex items-center flex-col w-fit">
           <h1 className="mb-4">Room : {roomData.room}</h1>
           <div className="flex flex-col items-center">
@@ -123,11 +128,18 @@ const Login = () => {
     );
 
   return (
-    <div className="w-full h-full m-2 flex items-center justify-center">
-      <div className="flex items-center flex-col w-fit">
-        <h1 className="mb-4 flex items-center">
-          Room : {roomData.room} {audioForEveryone && <MdOutlineAudiotrack />}{" "}
-        </h1>
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="flex items-center flex-col w-full p-3">
+        <div className="flex mb-4 flex-row justify-between items-center w-full">
+          <NavLink to="/login" end>
+            <HiArrowLeft className="transition min-w-[32px] min-h-[32px] ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300" alt="icone fleche retour" />
+          </NavLink>
+
+          <h1 className="flex items-center">
+            Room : {roomData.room} {audioForEveryone && <MdOutlineAudiotrack />}{" "}
+          </h1>
+          <div />
+        </div>
         {selectedVideo ? (
           <div className="flex flex-col items-center">
             <ConnectedPlayers players={users} />
@@ -139,7 +151,7 @@ const Login = () => {
           </div>
         ) : (
           <>
-            <div className="flex w-full gap-3">
+            <div className="flex justify-center w-full gap-3">
               <ConnectedPlayers players={users} />
               <div className="flex flex-col items-center">
                 {users.find((user) => user.id === socket.id)?.admin ? (
@@ -167,7 +179,7 @@ const Login = () => {
             <div className="">
               {dataSearch.map((item) => (
                 <div onClick={() => setSelectedVideo(item)} className="flex py-2 gap-2 bg-white max-w-[300px] cursor-pointer border hover:bg-green-100" key={item.videoId}>
-                  <img className="max-w-[50px]" src={item.thumbnail} alt="" />
+                  <img className="max-w-[50px] max-h-[48px]" src={item.thumbnail} alt="" />
                   <p>{decodeEntities(item.title)}</p>
                 </div>
               ))}
