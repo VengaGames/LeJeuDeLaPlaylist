@@ -9,6 +9,25 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: rgb(16, 115, 176);
+  /* background-color: rgb(16, 115, 176); */
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #accae3 -15deg,
+    #f5f4f5 13.12deg,
+    #accae3 54.38deg,
+    #f5f4f5 105deg,
+    #c6d2dc 150deg,
+    #4279a1 191.25deg,
+    #accae3 236.25deg,
+    #f5f4f5 288.75deg,
+    #accae3 345deg,
+    #f5f4f5 373.13deg
+  );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+
   overflow-x: hidden;
 }
