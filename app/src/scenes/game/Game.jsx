@@ -27,13 +27,14 @@ const Login = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    getSettings();
     const { name, room } = roomData;
     socket = io(import.meta.env.VITE_BACKEND_ENDPOINT, {
       transports: ["websocket"],
       upgrade: false,
     });
-    socket.emit("join", { name, room }, () => {});
+    socket.emit("join", { name, room }, () => {
+      getSettings();
+    });
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
@@ -51,6 +52,7 @@ const Login = () => {
     socket.on("audio-for-everyone-confirm", (confirmation) => {
       setAudioForEveryone(confirmation);
     });
+
     return () => {
       socket.off("disconnect");
       socket.off();

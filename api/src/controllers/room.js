@@ -18,7 +18,7 @@ router.get("/settings/:room", async (req, res) => {
     const { room } = req.params;
     const settings = getSettings(room);
     if (!settings) return res.status(404).send({ message: "Room not found", ok: false });
-    res.status(200).send({ data: settings[0], ok: true });
+    res.status(200).send({ data: settings, ok: true });
   } catch (e) {
     console.log(e);
     res.status(500).send({ message: e.message, ok: false });
