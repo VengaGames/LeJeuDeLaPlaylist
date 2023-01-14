@@ -91,7 +91,7 @@ const Login = () => {
 
   if (allVideosSelected)
     return (
-      <div className="w-full h-full m-2 flex items-center justify-center">
+      <div className="w-full h-full flex items-center justify-center">
         <Confetti width={width} height={height} />
         <div className="flex items-center flex-col w-fit">
           <h1 className="mb-4">Room : {roomData.room}</h1>
