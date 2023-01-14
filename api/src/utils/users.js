@@ -31,7 +31,7 @@ function getRooms() {
   rooms = [...new Set(rooms)];
 
   const usersNbInRooms = rooms.map((room) => getUsersInRoom(room)).map((users) => users.length);
-  return rooms.map((room, index) => ({ room, usersNb: usersNbInRooms[index] }));
+  return rooms.map((room, index) => ({ name: room, usersNb: usersNbInRooms[index] }));
 }
 
 function removeUser(id) {
