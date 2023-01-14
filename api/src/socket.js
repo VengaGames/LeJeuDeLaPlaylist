@@ -23,8 +23,7 @@ exports.connectToIoServer = (server) => {
           room: user.room,
           users: getUsersInRoom(user.room),
         });
-
-        callback();
+        if (callback) callback();
       } catch (e) {
         console.log(e);
       }
