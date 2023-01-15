@@ -9,6 +9,15 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: rgb(16, 115, 176);
+
+  background: linear-gradient(to top right, #ad24ba, rgba(255, 153, 150, 0), #6f36ee),
+    linear-gradient(to top left, rgb(19, 152, 126), rgba(255, 153, 150, 0), #072071) rgba(0, 254, 204, 1);
+  backdrop-filter: blur(800px);
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  min-height: 100vh;
+
   overflow-x: hidden;
 }
