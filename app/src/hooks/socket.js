@@ -22,7 +22,6 @@ const useSocket = () => {
     return () => {
       socket.current.off("connect");
       socket.current.off("disconnect");
-      socket.current.off("pong");
     };
   }, []);
 

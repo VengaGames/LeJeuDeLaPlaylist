@@ -21,6 +21,7 @@ const Login = () => {
   const [allVideosSelected, setAllVideosSelected] = useState(false);
   const [curentPlayingMusic, setCurrentPlayingMusic] = useState(null);
   const [audioForEveryone, setAudioForEveryone] = useState(false);
+  const [counter, setCounter] = useState(0);
 
   const [users, setUsers] = useState([]);
 
@@ -34,15 +35,18 @@ const Login = () => {
     });
     socket.on("all-videos-selected", (confirmation) => {
       setAllVideosSelected(confirmation);
+      setLoading(true);
       if (!confirmation) {
         setSelectedVideo(null);
         setDataSearch([]);
+        setLoading(false);
         return;
       }
       socket.emit("next-music", null);
     });
     socket.on("the-next-music", (music) => {
       setCurrentPlayingMusic(music);
+      setCounter((p) => p + 1);
     });
     socket.on("audio-for-everyone-confirm", (confirmation) => {
       setAudioForEveryone(confirmation);
@@ -96,15 +100,34 @@ const Login = () => {
           <div className="flex flex-col items-center">
             <div>Toutes les musiques ont été sélectionnées</div>
             <div>Jeu en cours</div>
+            <div>
+              Musique {counter}/{users.length}
+            </div>
+            {loading && <div>Chargement de l'audio en cours...</div>}
             {curentPlayingMusic ? (
               <div className="flex flex-col items-center">
-                {audioForEveryone ? <iframe className="h-0 w-0" src={`https://www.youtube.com/embed/${curentPlayingMusic.videoId}?autoplay=1`} allow="autoplay"></iframe> : null}
+                {audioForEveryone ? (
+                  <iframe
+                    onLoad={() => setLoading(false)}
+                    className="h-0 w-0"
+                    src={`https://www.youtube.com/embed/${curentPlayingMusic.videoId}?autoplay=1`}
+                    allow="autoplay"></iframe>
+                ) : null}
                 {users.find((user) => user.id === socket.id)?.admin ? (
                   <>
                     {!audioForEveryone ? (
-                      <iframe className="h-0 w-0" src={`https://www.youtube.com/embed/${curentPlayingMusic.videoId}?autoplay=1`} allow="autoplay"></iframe>
+                      <iframe
+                        onLoad={() => setLoading(false)}
+                        className="h-0 w-0"
+                        src={`https://www.youtube.com/embed/${curentPlayingMusic.videoId}?autoplay=1`}
+                        allow="autoplay"></iframe>
                     ) : null}
-                    <button className="p-1 border border-black m-2" onClick={() => socket.emit("next-music", null)}>
+                    <button
+                      className="p-1 border border-black m-2"
+                      onClick={() => {
+                        socket.emit("next-music", null);
+                        setLoading(true);
+                      }}>
                       Passer à la musique suivante
                     </button>
                   </>
