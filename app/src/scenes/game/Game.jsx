@@ -5,7 +5,7 @@ import { MdOutlineAudiotrack, MdOutlineAdminPanelSettings } from "react-icons/md
 import Confetti from "react-confetti";
 import { HiArrowLeft } from "react-icons/hi";
 import useSocket from "../../hooks/socket";
-
+import { RiLoader2Fill } from "react-icons/ri";
 const Login = () => {
   const query = new URLSearchParams(window.location.search);
   const { socket, isConnected } = useSocket();
@@ -79,6 +79,14 @@ const Login = () => {
     const str = el.textContent;
     return str;
   };
+
+  if (!isConnected)
+    return (
+      <div className="flex flex-col items-center gap-5">
+        <div>Connexion en cours...</div>
+        <RiLoader2Fill className="animate-spin text-7xl" />
+      </div>
+    );
 
   if (allVideosSelected)
     return (
