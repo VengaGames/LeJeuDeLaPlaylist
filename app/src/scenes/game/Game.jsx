@@ -6,6 +6,8 @@ import Confetti from "react-confetti";
 import { HiArrowLeft } from "react-icons/hi";
 import useSocket from "../../hooks/socket";
 import { RiLoader2Fill } from "react-icons/ri";
+import ReactPlayer from "react-player/youtube";
+
 const Login = () => {
   const query = new URLSearchParams(window.location.search);
   const { socket, isConnected } = useSocket();
@@ -27,9 +29,10 @@ const Login = () => {
 
   useEffect(() => {
     if (!isConnected) return;
-    getSettings();
     const { name, room } = roomData;
-    socket.emit("join", { name, room });
+    socket.emit("join", { name, room }, () => {
+      getSettings();
+    });
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
@@ -107,20 +110,12 @@ const Login = () => {
             {curentPlayingMusic ? (
               <div className="flex flex-col items-center">
                 {audioForEveryone ? (
-                  <iframe
-                    onLoad={() => setLoading(false)}
-                    className="h-0 w-0"
-                    src={`https://www.youtube.com/embed/${curentPlayingMusic.videoId}?autoplay=1`}
-                    allow="autoplay"></iframe>
+                  <ReactPlayer width={0} height={0} onReady={() => setLoading(false)} playing={true} url={`https://www.youtube.com/watch?v=${curentPlayingMusic.videoId}`} />
                 ) : null}
                 {users.find((user) => user.id === socket.id)?.admin ? (
                   <>
                     {!audioForEveryone ? (
-                      <iframe
-                        onLoad={() => setLoading(false)}
-                        className="h-0 w-0"
-                        src={`https://www.youtube.com/embed/${curentPlayingMusic.videoId}?autoplay=1`}
-                        allow="autoplay"></iframe>
+                      <ReactPlayer width={0} height={0} onReady={() => setLoading(false)} playing={true} url={`https://www.youtube.com/watch?v=${curentPlayingMusic.videoId}`} />
                     ) : null}
                     <button
                       className="p-1 border border-black m-2"

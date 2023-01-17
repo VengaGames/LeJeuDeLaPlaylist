@@ -3,7 +3,7 @@ const users = [];
 
 function addUser({ id, name, room }) {
   name = name.trim();
-  room = room.trim().toLowerCase();
+  room = room.trim();
 
   const existingUser = users.find((user) => user.room === room && user.name === name);
   if (existingUser) {
