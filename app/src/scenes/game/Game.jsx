@@ -54,6 +54,13 @@ const Login = () => {
     socket.on("audio-for-everyone-confirm", (confirmation) => {
       setAudioForEveryone(confirmation);
     });
+    return () => {
+      socket.off("roomData");
+      socket.off("all-videos-selected");
+      socket.off("the-next-music");
+      socket.off("audio-for-everyone-confirm");
+      socket.emit("leave-room");
+    };
   }, [isConnected]);
 
   useEffect(() => {

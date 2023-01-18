@@ -30,6 +30,7 @@ exports.connectToIoServer = (server) => {
     });
 
     require("./controllers/youtube").handleSocket(socket, io);
+    require("./controllers/room").handleSocket(socket, io);
 
     socket.on("disconnect", () => {
       try {
