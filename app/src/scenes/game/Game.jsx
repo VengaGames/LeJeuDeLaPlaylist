@@ -43,6 +43,7 @@ const Login = () => {
         setSelectedVideo(null);
         setDataSearch([]);
         setLoading(false);
+        setCounter(0);
         return;
       }
       socket.emit("next-music", null);
