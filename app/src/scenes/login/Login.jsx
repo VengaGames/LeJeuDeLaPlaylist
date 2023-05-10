@@ -43,6 +43,10 @@ const Login = () => {
               required
               type="text"
               name="room"
+              id="room"
+              onInvalid={(e) => {
+                e.target.setCustomValidity("Choisis un nom de salle !");
+              }}
             />
             <label className="ml-2.5 mt-2.5" htmlFor="name">
               Pseudo
@@ -54,10 +58,13 @@ const Login = () => {
               required
               type="text"
               name="name"
+              onInvalid={(e) => {
+                e.target.setCustomValidity("Choisis un pseudo !");
+              }}
             />
             <div className="flex flex-col items-center">
               <button className="bg-regal-purple rounded-lg border text-white mt-2 mb-2 w-20" type="submit">
-                JOIN
+                Rejoindre
               </button>
             </div>
           </form>
@@ -67,8 +74,8 @@ const Login = () => {
             <h1 className="text-lg mb-2">Salles disponibles :</h1>
             <div className="flex flex-col gap-2">
               {rooms.map((room) => (
-                <div key={room.room} className="flex gap-2">
-                  <div>{room.room}</div>
+                <div key={room.name} className="flex gap-2 cursor-pointer" onClick={() => (document.getElementById("room").value = room.name)}>
+                  <div>{room.name}</div>
                   <div>
                     ({room.usersNb} joueur{room.usersNb > 1 ? "s" : ""})
                   </div>
