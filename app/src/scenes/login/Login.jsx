@@ -27,7 +27,7 @@ const Login = () => {
   return (
     <div>
       <NavLink to="/" end>
-        <HiArrowLeft className="ml-2 mt-2 w-10 h-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ..." alt="icone fleche retour" />
+        <HiArrowLeft className="text-white ml-2 mt-2 w-10 h-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ..." alt="icone fleche retour" />
       </NavLink>
       <div className="w-full h-full flex flex-col items-center justify-center">
         <div className="bg-white justify-center flex flex-col border rounded-lg border-gray-500 items-center shadow-2xl w-3/4 md:w-1/4">
@@ -78,8 +78,8 @@ const Login = () => {
           </div>
         ) : null}
       </div>
-      <div className="fixed bottom-0 flex justify-center w-full">
-        <h3> Vengaboys © - 2023</h3>
+      <div className="fixed bottom-0 flex justify-center w-full bg-[#242531]">
+        <h3 className="text-white"> Vengaboys © - 2023</h3>
       </div>
     </div>
   );
