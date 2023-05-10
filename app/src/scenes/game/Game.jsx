@@ -6,7 +6,7 @@ import Confetti from "react-confetti";
 import { HiArrowLeft } from "react-icons/hi";
 import useSocket from "../../hooks/socket";
 import { RiLoader2Fill } from "react-icons/ri";
-import ReactPlayer from "react-player/youtube";
+import { Music } from "./MusicPlayer";
 
 const Login = () => {
   const query = new URLSearchParams(window.location.search);
@@ -117,14 +117,10 @@ const Login = () => {
             {loading && <div>Chargement de l'audio en cours...</div>}
             {curentPlayingMusic ? (
               <div className="flex flex-col items-center">
-                {audioForEveryone ? (
-                  <ReactPlayer width={0} height={0} onReady={() => setLoading(false)} playing={true} url={`https://www.youtube.com/watch?v=${curentPlayingMusic.videoId}`} />
-                ) : null}
+                {audioForEveryone ? <Music setLoading={setLoading} YTurl={curentPlayingMusic.videoId} /> : null}
                 {users.find((user) => user.id === socket.id)?.admin ? (
                   <>
-                    {!audioForEveryone ? (
-                      <ReactPlayer width={0} height={0} onReady={() => setLoading(false)} playing={true} url={`https://www.youtube.com/watch?v=${curentPlayingMusic.videoId}`} />
-                    ) : null}
+                    {!audioForEveryone ? <Music setLoading={setLoading} YTurl={curentPlayingMusic.videoId} /> : null}
                     <button
                       className="p-1 border border-black m-2"
                       onClick={() => {
