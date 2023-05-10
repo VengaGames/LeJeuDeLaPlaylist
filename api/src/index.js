@@ -4,8 +4,9 @@ const cors = require("cors");
 const http = require("http");
 const app = express();
 const { connectToIoServer } = require("./socket");
+const allowedOrigins = ["http://localhost:5173", "https://lejeudelaplaylist.onrender.com"];
 
-app.use(cors());
+app.use(cors(allowedOrigins));
 
 app.use("/youtube", require("./controllers/youtube"));
 app.use("/room", require("./controllers/room"));

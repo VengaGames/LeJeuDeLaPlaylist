@@ -23,14 +23,14 @@ exports.connectToIoServer = (server) => {
           room: user.room,
           users: getUsersInRoom(user.room),
         });
-
-        callback();
+        if (callback) callback();
       } catch (e) {
         console.log(e);
       }
     });
 
     require("./controllers/youtube").handleSocket(socket, io);
+    require("./controllers/room").handleSocket(socket, io);
 
     socket.on("disconnect", () => {
       try {

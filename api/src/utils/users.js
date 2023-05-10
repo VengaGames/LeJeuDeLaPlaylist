@@ -3,7 +3,7 @@ const users = [];
 
 function addUser({ id, name, room }) {
   name = name.trim();
-  room = room.trim().toLowerCase();
+  room = room.trim();
 
   const existingUser = users.find((user) => user.room === room && user.name === name);
   if (existingUser) {
@@ -31,7 +31,7 @@ function getRooms() {
   rooms = [...new Set(rooms)];
 
   const usersNbInRooms = rooms.map((room) => getUsersInRoom(room)).map((users) => users.length);
-  return rooms.map((room, index) => ({ room, usersNb: usersNbInRooms[index] }));
+  return rooms.map((room, index) => ({ name: room, usersNb: usersNbInRooms[index] }));
 }
 
 function removeUser(id) {

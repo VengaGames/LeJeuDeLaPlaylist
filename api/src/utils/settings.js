@@ -11,7 +11,9 @@ const setSettings = (room, settingName, value) => {
   }
 };
 
-const getSettings = () => settings;
+const getSettings = (room) => {
+  return settings.find((setting) => setting.room === room);
+};
 
 const removeRoom = (room) => {
   const index = settings.findIndex((setting) => setting.room === room);
