@@ -1,34 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import jeuplaylist from "../asset/jeuplaylist.png";
+import uno from "../asset/unologo.png";
 import { NavLink } from "react-router-dom";
 import vengaicon from "../asset/vengaicon.jpeg";
+import manette from "../asset/manette.svg";
 
 const Home = () => {
   return (
     <div>
-      <nav className="p-3 border-gray-700 bg-gray-800">
-        <div className="container flex flex-wrap items-center justify-between mx-auto">
-          <div className="flex flex-row">
-            <img src={vengaicon} className="h-6 mr-3 sm:h-10" alt="Venga Logo" />
+      <nav className="p-3 border-gray-700 bg-[#242531]">
+        <div className="container flex flex-wrap items-center justify-center mx-auto">
+          <div className="flex flex-row justify-center items-center">
+            <img src={vengaicon} className="h-6 mr-3 sm:h-10 " alt="Venga Logo" />
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">VengaGAMES</span>
           </div>
         </div>
       </nav>
-
       <div className="flex flex-row justify-center">
-        <div className="mt-10 justify-center">
-          <NavLink className="flex justify-center" to="/login" end>
-            <img
-              className=" w-6/12 h-8/10 rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 ..."
-              src={jeuplaylist}
-              alt="jeu de la playlist"
-            />
+        <div className="flex flex-col justify-center">
+          <div className="mt-10 justify-center mr-10 bg-[#242531] rounded-lg">
+            <div className="w-fit h-fit">
+              <img className="object-cover w-56 h-56 rounded-t-lg " src={jeuplaylist} alt="jeu de la playlist" />
+            </div>
+
+            <p className="mt-2 text-center font-semibold whitespace-nowrap dark:text-white">Jeu de la Playlist</p>
+          </div>
+          <NavLink className="" to="/login" end>
+            <div className="bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              {" "}
+              <p className=" mt-3 mb-3 font-semibold">Jouer</p> <img className="w-5 h-4 ml-2" src={manette} alt="manette logo" />
+            </div>
           </NavLink>
+        </div>
+
+        <div className="flex flex-col justify-center">
+          <div className="flex flex-col mt-10 justify-center bg-[#242531] rounded-lg ">
+            <div className="w-fit h-fit">
+              <img className="object-cover w-56 h-56 rounded-t-lg " src={uno} alt="uno logo" />
+            </div>
+
+            <p className="mt-2 text-center font-semibold whitespace-nowrap dark:text-white">UNO</p>
+          </div>
+          <a href="https://uno-lh06.onrender.com/" target="_blank" rel="noopener noreferrer">
+            <div className="bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              {" "}
+              <p className=" mt-3 mb-3 font-semibold">Jouer</p> <img className="w-5 h-4 ml-2" src={manette} alt="manette logo" />
+            </div>
+          </a>
         </div>
       </div>
 
-      <div className="fixed bottom-0 flex justify-center w-full bg-gray-800 ">
-        <h3 className=" text-white"> Vengaboys © - 2023</h3>
+      <div className="fixed bottom-0 flex justify-center w-full bg-[#242531]">
+        <h3 className="text-white">Vengaboys © - 2023</h3>
       </div>
     </div>
   );
