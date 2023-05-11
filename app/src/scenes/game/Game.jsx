@@ -6,7 +6,6 @@ import Confetti from "react-confetti";
 import { HiArrowLeft } from "react-icons/hi";
 import useSocket from "../../hooks/socket";
 import { RiLoader2Fill } from "react-icons/ri";
-import ReactPlayer from "react-player/youtube";
 import vengaicon from "../asset/vengaicon.jpeg";
 import vector from "../asset/Vector.svg";
 import { Music } from "./MusicPlayer";
