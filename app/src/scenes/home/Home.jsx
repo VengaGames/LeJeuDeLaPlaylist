@@ -41,7 +41,7 @@ const Home = () => {
 
             <p className="mt-2 text-center font-semibold whitespace-nowrap dark:text-white">UNO</p>
           </div>
-          <a href="https://uno-lh06.onrender.com/" target="_blank" rel="noopener noreferrer">
+          <a href="https://uno-lh06.onrender.com/" rel="noopener noreferrer">
             <div className="bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
               {" "}
               <p className=" mt-3 mb-3 font-semibold">Jouer</p> <img className="w-5 h-4 ml-2" src={manette} alt="manette logo" />

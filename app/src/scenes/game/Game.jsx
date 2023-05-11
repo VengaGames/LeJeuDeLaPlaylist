@@ -7,6 +7,8 @@ import { HiArrowLeft } from "react-icons/hi";
 import useSocket from "../../hooks/socket";
 import { RiLoader2Fill } from "react-icons/ri";
 import ReactPlayer from "react-player/youtube";
+import vengaicon from "../asset/vengaicon.jpeg";
+import vector from "../asset/Vector.svg";
 
 const Login = () => {
   const query = new URLSearchParams(window.location.search);
@@ -98,8 +100,8 @@ const Login = () => {
   if (!isConnected)
     return (
       <div className="flex flex-col items-center gap-5">
-        <div>Connexion en cours...</div>
-        <RiLoader2Fill className="animate-spin text-7xl" />
+        <div className="text-white">Connexion en cours...</div>
+        <RiLoader2Fill className="animate-spin text-7xl text-white" />
       </div>
     );
 
@@ -109,12 +111,12 @@ const Login = () => {
         <Confetti width={window.innerWidth} height={window.innerHeight} />
         <div className="flex items-center flex-col w-fit">
           <div className="flex flex-col items-center">
-            <div>Toutes les musiques ont été sélectionnées</div>
-            <div>Jeu en cours</div>
-            <div>
+            <div className="text-white">Toutes les musiques ont été sélectionnées</div>
+            <div className="text-white">Jeu en cours</div>
+            <div className="text-white">
               Musique {counter}/{users.length}
             </div>
-            {loading && <div>Chargement de l'audio en cours...</div>}
+            {loading && <div className="text-white">Chargement de l'audio en cours...</div>}
             {curentPlayingMusic ? (
               <div className="flex flex-col items-center">
                 {audioForEveryone ? (
@@ -126,7 +128,7 @@ const Login = () => {
                       <ReactPlayer width={0} height={0} onReady={() => setLoading(false)} playing={true} url={`https://www.youtube.com/watch?v=${curentPlayingMusic.videoId}`} />
                     ) : null}
                     <button
-                      className="p-1 border border-black m-2"
+                      className="p-1 bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center"
                       onClick={() => {
                         socket.emit("next-music", null);
                         setLoading(true);
@@ -146,43 +148,51 @@ const Login = () => {
     <Wrapper roomData={roomData} audioForEveryone={audioForEveryone} users={users}>
       {selectedVideo ? (
         <div className="flex flex-col items-center">
-          <div>Musique sélectionnée</div>
-          <div>Titre : {decodeEntities(selectedVideo.title)} </div>
-          <button className="p-1 border border-black m-2" onClick={() => setSelectedVideo(null)}>
+          <div className="text-white">Musique sélectionnée</div>
+          <div className="text-white">Titre : {decodeEntities(selectedVideo.title)} </div>
+          <button className="p-1 bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center font-semibold " onClick={() => setSelectedVideo(null)}>
             Revenir à la recherche
           </button>
         </div>
       ) : (
         <>
           <div className="flex justify-center w-full gap-3">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center mb-4">
               {users.find((user) => user.id === socket.id)?.admin ? (
                 <div className="flex gap-1 mb-2">
                   <input type="checkbox" checked={audioForEveryone} onChange={(e) => socket.emit("audio-for-everyone", e.target.checked)} />
-                  <label htmlFor="audioForEveryone">Audio pour tout le monde ?</label>
+                  <label className="text-white" htmlFor="audioForEveryone">
+                    Audio pour tout le monde ?
+                  </label>
                 </div>
               ) : null}
-              <input
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    getResults();
-                  }
-                }}
-                className="bg-gray-200 !ring-0 !outline-none"
-                type="text"
-                ref={qRef}
-              />
-              <button disabled={loading} className="p-1 border border-black m-2" onClick={() => getResults()}>
-                Rechercher
-              </button>
-              {loading && <div>Chargement...</div>}
+              <div className="flex flex-row bg-[#242531] rounded-3xl w-96 h-12  ">
+                <input
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      getResults();
+                    }
+                  }}
+                  placeholder="Pssst, donne moi le titre !"
+                  className="bg-[#242531] !ring-0 !outline-none rounded-3xl text-white w-96 h-12 ml-10"
+                  type="text"
+                  ref={qRef}
+                />
+                <button disabled={loading} className="p-3 rounded-full text-white bg-[#00FECC]" onClick={() => getResults()}>
+                  <img src={vector} alt="vector Logo" />
+                </button>
+              </div>
+              {loading && <div className="text-white">Chargement...</div>}
             </div>
           </div>
           <div className="">
             {dataSearch.map((item) => (
-              <div onClick={() => setSelectedVideo(item)} className="flex py-2 gap-2 bg-white max-w-[300px] cursor-pointer border hover:bg-green-100" key={item.videoId}>
-                <img className="max-w-[50px] max-h-[48px]" src={item.thumbnail} alt="" />
-                <p>{decodeEntities(item.title)}</p>
+              <div
+                onClick={() => setSelectedVideo(item)}
+                className="flex py-2 gap-2 bg-[#242531] max-w-[300px] cursor-pointer hover:bg-[#00FECC] rounded-xl mb-2"
+                key={item.videoId}>
+                <img className="max-w-[50px] max-h-[48px] rounded-lg ml-2 " src={item.thumbnail} alt="" />
+                <p className="text-white mr-2 ml-4">{decodeEntities(item.title)}</p>
               </div>
             ))}
           </div>
@@ -209,13 +219,13 @@ const ConnectedPlayers = ({ players }) => {
   });
   return (
     <div onClick={() => setShowPlayers((prev) => !prev)} className="flex flex-col h-fit p-3 border border-black rounded-lg items-center">
-      <div className="">Joueurs</div>
+      <div className="text-white">Joueurs</div>
       {showPlayers ? (
         <div className="flex flex-col gap-2">
           {players.map((player) => (
             <div key={player.id} className="flex gap-2">
               {player.admin && <MdOutlineAdminPanelSettings className="text-red-500" />}
-              <div className={`${player.videoSelected ? "text-green-500" : "text-black"}`}>{player.name}</div>
+              <div className={`${player.videoSelected ? "text-green-500" : "text-white"}`}>{player.name}</div>
             </div>
           ))}
         </div>
@@ -228,19 +238,32 @@ const ConnectedPlayers = ({ players }) => {
 
 const Wrapper = ({ children, roomData, audioForEveryone, users }) => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-3">
-      <div className="flex mb-4 flex-row justify-between items-center w-full">
-        <NavLink to="/login" end>
-          <HiArrowLeft className="transition min-w-[32px] min-h-[32px] ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300" alt="icone fleche retour" />
-        </NavLink>
+    <div>
+      <nav className="p-3 border-gray-700 bg-[#242531]">
+        <div className="container flex flex-wrap items-center justify-center mx-auto">
+          <div className="flex flex-row justify-center items-center">
+            <img src={vengaicon} className="h-6 mr-3 sm:h-10 " alt="Venga Logo" />
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">VengaGAMES</span>
+          </div>
+        </div>
+      </nav>
+      <div className="w-full h-full flex flex-col items-center justify-center p-3">
+        <div className="flex mb-4 flex-row justify-between items-center w-full">
+          <NavLink to="/login" end>
+            <HiArrowLeft
+              className="text-white transition min-w-[32px] min-h-[32px] ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+              alt="icone fleche retour"
+            />
+          </NavLink>
 
-        <h1 className="flex items-center">
-          Room : {roomData.room} {audioForEveryone && <MdOutlineAudiotrack />}
-        </h1>
-        <div />
+          <h1 className="flex items-center text-white">
+            Room : {roomData.room} {audioForEveryone && <MdOutlineAudiotrack />}
+          </h1>
+          <div />
+        </div>
+        <ConnectedPlayers players={users} />
+        <div className="flex items-center flex-col w-full p-3">{children}</div>
       </div>
-      <ConnectedPlayers players={users} />
-      <div className="flex items-center flex-col w-full p-3">{children}</div>
     </div>
   );
 };
