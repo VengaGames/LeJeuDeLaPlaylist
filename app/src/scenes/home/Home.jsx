@@ -4,6 +4,7 @@ import uno from "../asset/unologo.png";
 import { NavLink } from "react-router-dom";
 import vengaicon from "../asset/vengaicon.jpeg";
 import manette from "../asset/manette.svg";
+import blindtest from "../asset/blindtest.jpeg";
 
 const Home = () => {
   return (
@@ -42,6 +43,21 @@ const Home = () => {
             <p className="mt-2 text-center font-semibold whitespace-nowrap dark:text-white">UNO</p>
           </div>
           <a href="https://uno-lh06.onrender.com/" rel="noopener noreferrer">
+            <div className="bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              {" "}
+              <p className=" mt-3 mb-3 font-semibold">Jouer</p> <img className="w-5 h-4 ml-2" src={manette} alt="manette logo" />
+            </div>
+          </a>
+        </div>
+        <div className="flex flex-col justify-center ml-10">
+          <div className="flex flex-col mt-10 justify-center bg-[#242531] rounded-lg ">
+            <div className="w-fit h-fit">
+              <img className="object-cover w-56 h-56 rounded-t-lg " src={blindtest} alt="blindtest logo" />
+            </div>
+
+            <p className="mt-2 text-center font-semibold whitespace-nowrap dark:text-white">BlindTest</p>
+          </div>
+          <a href="https://vengablindtest.onrender.com/" rel="noopener noreferrer">
             <div className="bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
               {" "}
               <p className=" mt-3 mb-3 font-semibold">Jouer</p> <img className="w-5 h-4 ml-2" src={manette} alt="manette logo" />
