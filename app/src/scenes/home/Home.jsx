@@ -1,10 +1,10 @@
 import React from "react";
-import jeuplaylist from "../asset/jeuplaylist.png";
-import uno from "../asset/unologo.png";
+import jeuplaylist from "/assets/jeuplaylist.png";
+import uno from "/assets/unologo.png";
 import { NavLink } from "react-router-dom";
-import vengaicon from "../asset/vengaicon.jpeg";
-import manette from "../asset/manette.svg";
-import blindtest from "../asset/blindtest.jpeg";
+import vengaicon from "/assets/vengaicon.jpeg";
+import manette from "/assets/manette.svg";
+import blindtest from "/assets/blindtest.jpeg";
 
 const Home = () => {
   return (

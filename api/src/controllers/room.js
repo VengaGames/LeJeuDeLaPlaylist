@@ -40,15 +40,16 @@ roomController.handleSocket = (socket, io) => {
   socket.on("leave-room", () => {
     try {
       const user = removeUser(socket.id);
+      if (!user) return;
       const usersInRoom = getUsersInRoom(user.room);
 
       io.to(user.room).emit("roomData", {
         room: user.room,
-        users: getUsersInRoom(user.room),
+        users: usersInRoom,
       });
 
       if (usersInRoom.every((user) => user.videoSelected)) {
-        io.to(user.room).emit("all-videos-selected", true);
+        io.to(user.room).emit("all-videos-selected");
       }
     } catch (error) {
       console.log(error);

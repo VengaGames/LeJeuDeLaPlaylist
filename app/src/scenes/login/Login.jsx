@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import API from "../../service/api";
 import { HiArrowLeft } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
-import vengaicon from "../asset/vengaicon.jpeg";
+import vengaicon from "/assets/vengaicon.jpeg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -74,12 +74,12 @@ const Login = () => {
         </div>
         {rooms.length > 0 ? (
           <div className="mt-8">
-            <h1 className="text-lg mb-2">Salles disponibles :</h1>
+            <h1 className="text-lg mb-2 text-white">Salles disponibles :</h1>
             <div className="flex flex-col gap-2">
               {rooms.map((room) => (
                 <div key={room.name} className="flex gap-2 cursor-pointer" onClick={() => (document.getElementById("room").value = room.name)}>
-                  <div>{room.name}</div>
-                  <div>
+                  <div className="text-white">{room.name}</div>
+                  <div className="text-white">
                     ({room.usersNb} joueur{room.usersNb > 1 ? "s" : ""})
                   </div>
                 </div>

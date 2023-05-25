@@ -15,8 +15,6 @@ exports.connectToIoServer = (server) => {
         const { user } = addUser({ id: socket.id, name, room });
         if (!user) return;
 
-        console.log(`${user.name} joined ${user.room}`);
-
         socket.join(user.room);
 
         io.to(user.room).emit("roomData", {
@@ -36,7 +34,6 @@ exports.connectToIoServer = (server) => {
       try {
         const user = removeUser(socket.id);
         if (!user) return;
-        console.log(`${user.name} left ${user.room}`);
         io.to(user.room).emit("roomData", {
           room: user.room,
           users: getUsersInRoom(user.room),
