@@ -9,7 +9,7 @@ import blindtest from "/assets/blindtest.jpeg";
 const Home = () => {
   return (
     <div>
-      <nav className="p-3 border-gray-700 bg-[#242531]">
+      <nav className="p-3 border-gray-700 bg-[#1e1f29]">
         <div className="container flex flex-wrap items-center justify-center mx-auto">
           <div className="flex flex-row justify-center items-center">
             <img src={vengaicon} className="h-6 mr-3 sm:h-10 " alt="Venga Logo" />
@@ -19,7 +19,7 @@ const Home = () => {
       </nav>
       <div className="flex flex-row justify-center">
         <div className="flex flex-col justify-center">
-          <div className="mt-10 justify-center mr-10 bg-[#242531] rounded-lg">
+          <div className="mt-10 justify-center mr-10 bg-[#1e1f29] rounded-lg">
             <div className="w-fit h-fit">
               <img className="object-cover w-56 h-56 rounded-t-lg " src={jeuplaylist} alt="jeu de la playlist" />
             </div>
@@ -35,7 +35,7 @@ const Home = () => {
         </div>
 
         <div className="flex flex-col justify-center">
-          <div className="flex flex-col mt-10 justify-center bg-[#242531] rounded-lg ">
+          <div className="flex flex-col mt-10 justify-center bg-[#1e1f29] rounded-lg ">
             <div className="w-fit h-fit">
               <img className="object-cover w-56 h-56 rounded-t-lg " src={uno} alt="uno logo" />
             </div>
@@ -50,7 +50,7 @@ const Home = () => {
           </a>
         </div>
         <div className="flex flex-col justify-center ml-10">
-          <div className="flex flex-col mt-10 justify-center bg-[#242531] rounded-lg ">
+          <div className="flex flex-col mt-10 justify-center bg-[#1e1f29] rounded-lg ">
             <div className="w-fit h-fit">
               <img className="object-cover w-56 h-56 rounded-t-lg " src={blindtest} alt="blindtest logo" />
             </div>
@@ -66,7 +66,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-0 flex justify-center w-full bg-[#242531]">
+      <div className="fixed bottom-0 flex justify-center w-full bg-[#1e1f29]">
         <h3 className="text-white">Vengaboys © - 2023</h3>
       </div>
     </div>

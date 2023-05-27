@@ -60,6 +60,10 @@ module.exports = {
         down2: "0 5px 5px -10px #00000014",
         down3: "0 5px 20px -5px #00000014",
       },
+      backgroundImage:{
+        'background_login': "url('/assets/Background_login.png')",
+        
+      }
     },
   },
   variants: {

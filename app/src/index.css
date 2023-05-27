@@ -13,4 +13,6 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #1f1f26;
   overflow-x: hidden;
+  background-image: url('/assets/Background_login.png');
+  
 }
