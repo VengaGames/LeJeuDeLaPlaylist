@@ -1,5 +1,5 @@
 import React from "react";
-import jeuplaylist from "/assets/jeuplaylist.png";
+import jeuplaylist from "/assets/playlist.jpg";
 import uno from "/assets/unologo.png";
 import { NavLink } from "react-router-dom";
 import vengaicon from "/assets/vengaicon.jpeg";
@@ -17,51 +17,46 @@ const Home = () => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-row justify-center">
-        <div className="flex flex-col justify-center">
-          <div className="mt-10 justify-center mr-10 bg-[#1e1f29] rounded-lg">
-            <div className="w-fit h-fit">
-              <img className="object-cover w-56 h-56 rounded-t-lg " src={jeuplaylist} alt="jeu de la playlist" />
-            </div>
-
-            <p className="mt-2 text-center font-semibold whitespace-nowrap dark:text-white">Jeu de la Playlist</p>
+      <div className="flex flex-row flex-wrap pt-10 gap-10 justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
+          <div className="justify-center bg-[#1e1f29] rounded-lg p-5">
+            <img className="object-cover w-56 h-56 rounded-lg" src={jeuplaylist} alt="jeu de la playlist" />
+            <p className="pt-5 text-center font-semibold whitespace-nowrap dark:text-white">Jeu de la Playlist</p>
           </div>
-          <NavLink className="" to="/login" end>
-            <div className="bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-              {" "}
-              <p className=" mt-3 mb-3 font-semibold">Jouer</p> <img className="w-5 h-4 ml-2" src={manette} alt="manette logo" />
-            </div>
+          <NavLink
+            className="mt-10 bg-[#FDFDFD] rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
+            to="/login"
+            end>
+            <p className="p-3 font-semibold">Jouer</p>
+            <img className="w-5 h-4" src={manette} alt="manette logo" />
           </NavLink>
         </div>
 
-        <div className="flex flex-col justify-center">
-          <div className="flex flex-col mt-10 justify-center bg-[#1e1f29] rounded-lg ">
-            <div className="w-fit h-fit">
-              <img className="object-cover w-56 h-56 rounded-t-lg " src={uno} alt="uno logo" />
-            </div>
-
-            <p className="mt-2 text-center font-semibold whitespace-nowrap dark:text-white">UNO</p>
+        <div className="flex flex-col justify-center items-center">
+          <div className="justify-center bg-[#1e1f29] rounded-lg p-5">
+            <img className="object-cover w-56 h-56 rounded-lg" src={uno} alt="jeu de la playlist" />
+            <p className="pt-5 text-center font-semibold whitespace-nowrap dark:text-white">UNO</p>
           </div>
-          <a href="https://uno-lh06.onrender.com/" rel="noopener noreferrer">
-            <div className="bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-              {" "}
-              <p className=" mt-3 mb-3 font-semibold">Jouer</p> <img className="w-5 h-4 ml-2" src={manette} alt="manette logo" />
-            </div>
+          <a
+            className="mt-10 bg-[#FDFDFD] rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
+            href="https://uno-lh06.onrender.com/"
+            rel="noopener noreferrer">
+            <p className="p-3 font-semibold">Jouer</p>
+            <img className="w-5 h-4" src={manette} alt="manette logo" />
           </a>
         </div>
-        <div className="flex flex-col justify-center ml-10">
-          <div className="flex flex-col mt-10 justify-center bg-[#1e1f29] rounded-lg ">
-            <div className="w-fit h-fit">
-              <img className="object-cover w-56 h-56 rounded-t-lg " src={blindtest} alt="blindtest logo" />
-            </div>
 
-            <p className="mt-2 text-center font-semibold whitespace-nowrap dark:text-white">BlindTest</p>
+        <div className="flex flex-col justify-center items-center mb-10">
+          <div className="justify-center bg-[#1e1f29] rounded-lg p-5">
+            <img className="object-cover w-56 h-56 rounded-lg" src={blindtest} alt="jeu de la playlist" />
+            <p className="pt-5 text-center font-semibold whitespace-nowrap dark:text-white">BlindTest</p>
           </div>
-          <a href="https://vengablindtest.onrender.com/" rel="noopener noreferrer">
-            <div className="bg-[#FDFDFD] mt-10 rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-              {" "}
-              <p className=" mt-3 mb-3 font-semibold">Jouer</p> <img className="w-5 h-4 ml-2" src={manette} alt="manette logo" />
-            </div>
+          <a
+            className="mt-10 bg-[#FDFDFD] rounded-3xl text-center w-56 flex flex-row justify-center items-center transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
+            href="https://vengablindtest.onrender.com/"
+            rel="noopener noreferrer">
+            <p className="p-3 font-semibold">Jouer</p>
+            <img className="w-5 h-4" src={manette} alt="manette logo" />
           </a>
         </div>
       </div>
