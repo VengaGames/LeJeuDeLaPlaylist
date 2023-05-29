@@ -17,7 +17,7 @@ const Home = () => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-row flex-wrap pt-10 gap-10 justify-center items-center">
+      <div className="flex flex-row flex-wrap pt-10 gap-10 justify-center items-center mb-10">
         <div className="flex flex-col justify-center items-center">
           <div className="justify-center bg-[#1e1f29] rounded-lg p-5">
             <img className="object-cover w-56 h-56 rounded-lg" src={jeuplaylist} alt="jeu de la playlist" />
@@ -46,7 +46,7 @@ const Home = () => {
           </a>
         </div>
 
-        <div className="flex flex-col justify-center items-center mb-10">
+        <div className="flex flex-col justify-center items-center">
           <div className="justify-center bg-[#1e1f29] rounded-lg p-5">
             <img className="object-cover w-56 h-56 rounded-lg" src={blindtest} alt="jeu de la playlist" />
             <p className="pt-5 text-center font-semibold whitespace-nowrap dark:text-white">BlindTest</p>
