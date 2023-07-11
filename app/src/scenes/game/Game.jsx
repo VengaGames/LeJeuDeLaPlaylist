@@ -26,6 +26,7 @@ const Login = () => {
   useEffect(() => {
     if (!isConnected) return;
     const { name, room } = roomData;
+    if (!name || !room) return (window.location.href = "https://vengahomepage.onrender.com/login?game=playlist");
     socket.emit("join", { name, room }, () => getSettings());
     socket.on("roomData", ({ users }) => setUsers(users));
 
@@ -196,7 +197,7 @@ const Wrapper = ({ children, roomData, audioForEveryone, users }) => {
       </nav>
       <div className="w-full h-full flex flex-col items-center justify-center p-3">
         <div className="flex mb-4 flex-row justify-between items-center w-full">
-          <NavLink to="/login" end>
+          <NavLink to="https://vengahomepage.onrender.com/login?game=playlist" end>
             <HiArrowLeft
               className="text-white transition min-w-[32px] min-h-[32px] ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
               alt="icone fleche retour"
