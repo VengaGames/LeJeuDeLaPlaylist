@@ -1,4 +1,4 @@
-const { initSettings, removeRoom } = require("../utils/settings");
+const { initSettings, removeRoom } = require('../utils/settings');
 const users = [];
 
 function addUser({ id, name, room }) {
@@ -7,7 +7,7 @@ function addUser({ id, name, room }) {
 
   const existingUser = users.find((user) => user.room === room && user.name === name);
   if (existingUser) {
-    return { error: "User is taken" };
+    return { error: 'User is taken' };
   }
 
   const usersInThisRoom = getUsersInRoom(room);

@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { io } from "socket.io-client";
+import { useEffect, useRef, useState } from 'react';
+import { io } from 'socket.io-client';
 
 const useSocket = () => {
   const socket = useRef();
@@ -7,21 +7,21 @@ const useSocket = () => {
 
   useEffect(() => {
     socket.current = io(import.meta.env.VITE_BACKEND_ENDPOINT, {
-      transports: ["websocket"],
+      transports: ['websocket'],
       upgrade: false,
     });
 
-    socket.current.on("connect", () => {
+    socket.current.on('connect', () => {
       setIsConnected(true);
     });
 
-    socket.current.on("disconnect", () => {
+    socket.current.on('disconnect', () => {
       setIsConnected(false);
     });
 
     return () => {
-      socket.current.off("connect");
-      socket.current.off("disconnect");
+      socket.current.off('connect');
+      socket.current.off('disconnect');
     };
   }, []);
 

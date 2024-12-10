@@ -3,8 +3,8 @@ class ApiService {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await fetch(`${import.meta.env.VITE_BACKEND_ENDPOINT}${path}`, {
-          mode: "cors",
-          method: "GET",
+          mode: 'cors',
+          method: 'GET',
         });
         const res = await response.json();
         resolve(res);
@@ -14,5 +14,6 @@ class ApiService {
     });
   }
 }
+
 const API = new ApiService();
 export default API;

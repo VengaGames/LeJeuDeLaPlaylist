@@ -1,23 +1,23 @@
-const { Server } = require("socket.io");
-const { addUser, removeUser, getUsersInRoom } = require("./utils/users");
+const { Server } = require('socket.io');
+const { addUser, removeUser, getUsersInRoom } = require('./utils/users');
 
 exports.connectToIoServer = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: "*",
-      methods: ["GET", "POST"],
+      origin: '*',
+      methods: ['GET', 'POST'],
     },
   });
 
-  io.on("connection", (socket) => {
-    socket.on("join", ({ name, room }, callback) => {
+  io.on('connection', (socket) => {
+    socket.on('join', ({ name, room }, callback) => {
       try {
         const { user } = addUser({ id: socket.id, name, room });
         if (!user) return;
 
         socket.join(user.room);
 
-        io.to(user.room).emit("roomData", {
+        io.to(user.room).emit('roomData', {
           room: user.room,
           users: getUsersInRoom(user.room),
         });
@@ -27,14 +27,14 @@ exports.connectToIoServer = (server) => {
       }
     });
 
-    require("./controllers/youtube").handleSocket(socket, io);
-    require("./controllers/room").handleSocket(socket, io);
+    require('./controllers/youtube').handleSocket(socket, io);
+    require('./controllers/room').handleSocket(socket, io);
 
-    socket.on("disconnect", () => {
+    socket.on('disconnect', () => {
       try {
         const user = removeUser(socket.id);
         if (!user) return;
-        io.to(user.room).emit("roomData", {
+        io.to(user.room).emit('roomData', {
           room: user.room,
           users: getUsersInRoom(user.room),
         });
