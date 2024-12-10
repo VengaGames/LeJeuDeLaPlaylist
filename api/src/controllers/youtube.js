@@ -2,22 +2,21 @@ const express = require('express');
 const router = express.Router();
 const { addSong, removeSong, getPlaylist, getFirstSong, removeSongByUser } = require('../utils/playlist');
 const { modifyUser, getUsersInRoom, getUser } = require('../utils/users');
-const ytsr = require('ytsr');
 
 router.get('/search', async (req, res) => {
   try {
     const { q } = req.query;
-    const data = await ytsr(`${q} audio`, { limit: 10 });
+    const url = `https://inv.nadeko.net/api/v1/search?q=${q}&type=video&sort=relevance&hl=fr`;
+    const data = await fetch(url).then((res) => res.json());
 
-    let videos = data.items.filter((item) => item.type === 'video');
-    videos = videos.map((video) => {
-      return {
-        id: video.id,
+    return res.status(200).send({
+      data: data.map((video) => ({
+        id: video.videoId,
         title: video.title,
-        thumbnail: video.bestThumbnail.url || video.thumbnails?.[0]?.url || '',
-      };
+        thumbnail: video.videoThumbnails?.find((thumb) => thumb.quality === 'maxres')?.url,
+      })),
+      ok: true
     });
-    return res.status(200).send({ data: videos, ok: true });
   } catch (e) {
     console.log(e);
     res.status(500).send({ message: e.message, ok: false });

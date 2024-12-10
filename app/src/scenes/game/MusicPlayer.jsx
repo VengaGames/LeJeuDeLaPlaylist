@@ -13,7 +13,7 @@ export function Music({ YTurl, setLoading }) {
         createElement(
           "iframe",
           {
-            src: `https://yewtu.be/embed/${YTurl}?local=true&iv_load_policy=3&autoplay=1&continue=0&listen=true&quality=medium&related_videos=false&comments=false&loop=0&volume=${volume}`,
+            src: `https://inv.nadeko.net/embed/${YTurl}?local=true&iv_load_policy=3&autoplay=1&continue=0&listen=true&quality=medium&related_videos=false&comments=false&loop=0&volume=${volume}`,
             className: "hidden",
             id: "ytplayer",
             name: "youtube-player",
