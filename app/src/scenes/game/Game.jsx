@@ -72,8 +72,7 @@ const Login = () => {
   const decodeEntities = (s) => {
     const el = document.createElement('p');
     el.innerHTML = s;
-    const str = el.textContent;
-    return str;
+    return el.textContent;
   };
 
   if (!isConnected)
